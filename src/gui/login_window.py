@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-from add_transaction_window import add_transaction
+
 
 
 class LoginWindow(tk.Tk):
@@ -9,13 +9,12 @@ class LoginWindow(tk.Tk):
 
         # set window properties
         self.title("Login - PyFinance (Personal Finance Tracker)")
-        self.geometry("800x600")  # Width x Height
-        self.configure(bg="#0F102B")
+        self.geometry("800x600") 
+        self.configure(bg="#0F102B", cursor="hand2")
 
         # container
-        self.box = ttk.Frame(self, width=405, height=240)
+        self.box = tk.Frame(self, width=405, height=240, bg="#23243C")
         self.box.place(relx=0.5, rely=0.5, anchor="center")
-        self.box.configure(style="TFrame")
 
         logo = tk.PhotoImage(file="img/logo.png")
         logo_label = ttk.Label(self.box, image=logo)
@@ -51,7 +50,6 @@ class LoginWindow(tk.Tk):
 
         # configuring style of the widgets
         style = ttk.Style()
-        style.configure("TFrame", background="#23243C")
         style.configure("TLabel", background="#23243C")
         style.configure("TEntry", fieldbackground="#23243C", foreground="white")
         style.configure(
@@ -59,10 +57,8 @@ class LoginWindow(tk.Tk):
         )
 
     def login(self):
-        if self.name_input.get():
-            self.destroy()
-            transaction_window = add_transaction(self.name_input.get())
-            transaction_window.mainloop()
+        user_name = self.name_input.get()
+        self.destroy()  # Destroy the login window
 
 
 # Run the window
