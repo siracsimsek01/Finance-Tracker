@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk
 from ttkbootstrap import Style
+# from gui.main_window import MainWindow  
+
 
 class AddTransactionWindow(tk.Toplevel):
     def __init__(self, parent):
@@ -46,10 +48,8 @@ class AddTransactionWindow(tk.Toplevel):
         save_btn.pack(fill='x', padx=10, pady=10)
         
     def save_transaction(self):
-        print("Transaction saved!")
+       pass
             
 if __name__ == '__main__':
     root = tk.Tk()
     root.withdraw()
-    add_transaction_window = AddTransactionWindow(root)
-    add_transaction_window.mainloop()
