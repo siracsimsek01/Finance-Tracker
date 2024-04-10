@@ -12,6 +12,7 @@ COLOR_BLACK = "#000"
 TEXT_HEADING = ("Roboto", 18)
 TEXT_TEXT = ("Roboto", 14)
 TEXT_LABEL = ("Roboto", 12)
+TEXT_TITLE = ("Roboto", 52)
 
 
 def primary_button(master, **kwargs):
@@ -21,6 +22,18 @@ def primary_button(master, **kwargs):
         "relief": "flat",
         "padx": 10,
         "pady": 5,    
+    }
+    
+    default.update(kwargs)
+    return Button(master, **default)
+
+def secondary_button(master, **kwargs):
+    default = {
+        "bg": "#1F3A5F",
+        "fg": COLOR_BLACK,
+        "relief": "flat",
+        "padx": 10,
+        "pady": 5,
     }
     
     default.update(kwargs)

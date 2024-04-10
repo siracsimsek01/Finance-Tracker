@@ -6,17 +6,25 @@ from utils.styles import *
 # from  utils.styles import primary_label, TEXT_TEXT, COLOR_BG
 import json
 import os
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from utils.graphs import balance_graph
+import numpy as np
+
+
+
+
 
 
 class MainWindow(tk.Tk):
     def __init__(self, user_name=""):
         super().__init__()
         self.title("PyFinance - Personal Finance Tracker")
-        self.geometry("1000x600")
+        self.geometry("700x600")
         self.configure(bg="#0F102B")
         self.balance = 0
-        
-        border_radius = int(0.3 * 20)
+        self.resizable(False, False)  
+
+  
 
         # Set user name and greeting
         
@@ -41,85 +49,60 @@ class MainWindow(tk.Tk):
         self.logout_button.place(x=140, y=500, anchor="center")
         
         
-        self.right_frame = Frame(self, bg=COLOR_PRIMARY, width=700, height=600)
+        self.right_frame = Frame(self, bg=COLOR_PRIMARY, width=900, height=600)
         self.right_frame.pack(side="right", fill="both", expand=True)
         
         self.balance_frame = Frame(self.right_frame, bg=COLOR_FRAME, width=350, height=150, highlightthickness=0)
-        self.balance_frame.pack(side="top", fill="none", expand=True, padx=20, pady=20, anchor='nw')
+        self.balance_frame.pack(side="top", fill="none", expand=False, padx=20, pady=20, anchor='nw')
         
-        pound_label = Label(self.balance_frame, text="£", font=TEXT_LABEL, bg=COLOR_FRAME, fg=COLOR_WHITE)
+        self.pound_label = Label(self.balance_frame, text="£", font=TEXT_HEADING, bg=COLOR_FRAME, fg=COLOR_WHITE)
+        self.pound_label.place(x=20, y=100)
         
         self.balance_label = balance_label(self.balance_frame, text="Total Balance", font=TEXT_HEADING, bg=COLOR_FRAME, fg=COLOR_WHITE)
-        self.balance_label.place(x=20, y=20)
+        self.balance_label.place(x=40, y=20)
         
-        self.balance_label = header_label(self.balance_frame, text=f"{pound_label}{self.balance}", font=TEXT_HEADING)
-        self.balance_label.place(x=330, y=100)
+        self.balance_label = header_label(self.balance_frame, text=f"{self.balance}", font=TEXT_TITLE, bg=COLOR_FRAME, fg=COLOR_WHITE) 
+        self.balance_label.place(x=40, y=70)
         
-
         
-        # greeting = Label(
-        #     self,
-        #     text=f"Welcome {user_name}!",
-        #     fg="white",
-        #     bg="#0F102B",
-        #     font=("Helvetica", 18),
-        # )
-        # greeting.pack()
-
-        # # Setup initial balance
-        # self.balance = 0
-        # self.balance_label = Label(
-        #     self,
-        #     text=f"Your current balance is: £{self.balance}",
-        #     fg="white",
-        #     bg="#0F102B",
-        #     font=("Helvetica", 18),
-        # )
-        # self.balance_label.pack()
-
+        self.summary_frame = Frame(self.right_frame, bg=COLOR_FRAME, width=350, height=500, highlightthickness=0)
+        self.summary_frame.pack(side="left", fill="none", expand=True, padx=20, pady=20, anchor='sw')
+         
+        self.summary_label = primary_label(self.summary_frame, text="Summary", font=TEXT_TEXT, bg=COLOR_FRAME, fg=COLOR_WHITE)
+        self.summary_label.place(x=20, y=25)
         
-        # buttons_frame = tk.Frame(self, bg="#0F102B")
-        # buttons_frame.pack(pady=10)
+        self.income_button = secondary_button(self.summary_frame, text="Incomes", font=TEXT_TEXT, command=self.view_incomes)
+        self.income_button.place(x=110, y=20)
+        
+        self.expense_button = secondary_button(self.summary_frame, text="Expenses", font=TEXT_TEXT, command=self.view_expenses)
+        self.expense_button.place(x=220, y=20)   
+            
+        self.summary_block = Frame(self.summary_frame, bg=COLOR_PRIMARY, width=280, height=50, highlightthickness=0)
+        self.summary_block.place(x=50, y=80)
+        
+        
+        # self.graph_frame = Frame(self.right_frame, bg=COLOR_FRAME, width=350, height=300)
+        # self.graph_frame.pack(side="top", fill="x", expand=True, padx=20, pady=20, anchor='ne')
+        # self.create_graph()
         
 
-        # self.add_transaction_button = tk.Button(
-        #     self,
-        #     text="Add Transaction",
-        #     command=self.add_transaction,
-        #     bg="#333333",
-        #     relief="solid",
-        #     width=20,
-        # )
-        # self.add_transaction_button.pack(in_=buttons_frame, side="left", padx=10)
 
-        # # Button to view summary
-        # self.summary_button = tk.Button(
-        #     self,
-        #     text="View Summary",
-        #     command=self.view_summary,
-        #     bg="#333333",
-        #     relief="solid",
-        #     width=20,
-        # )
-        # self.summary_button.pack(in_=buttons_frame, side="left", padx=10)
+    def create_graph(self):
+        # Generating the figure with your function. Adjust as necessary.
+        fig = balance_graph()
 
-        # # Button to delete transaction
-        # self.delete_transaction_button = tk.Button(
-        #     self,
-        #     text="Delete Transaction",
-        #     command=self.delete_transaction,
-        #     bg="#333333",
-        #     relief="solid",
-        #     width=20,
-        # )
-        # self.delete_transaction_button.pack(in_=buttons_frame, side="left", padx=10)
-
-        # # Frame for showing summary of transactions
-        # self.summary_frame = Frame(self, bg="#0F102B")
-        # self.summary_frame.pack(fill="both", expand=True, padx=20, pady=20)
+        # Embedding the figure in the Tkinter window
+        canvas = FigureCanvasTkAgg(fig, master=self.graph_frame)  # Use self.graph_frame as the master
+        canvas.draw()
+        canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)
+    
+        
+            
+        
+        
 
         # Load transactions and update balance
-        self.load_transactions()
+        # self.load_transactions()
         # self.update_balance()
 
     def load_transactions(self):
@@ -139,6 +122,37 @@ class MainWindow(tk.Tk):
       except json.JSONDecodeError as e:
         self.transactions = []
         messagebox.showerror("Error", f"Invalid JSON format in transactions file: {file_path}")
+        
+
+    def view_incomes(self):
+        with open('data/transactions.json', 'r') as file:
+            transactions = json.load(file)
+            print(transactions)
+            
+            incomes = [t["amount"] for t in transactions if t["type"] == "Income"]
+            
+            for transaction in transactions:
+                if transaction["type"] == "Income":
+                       for i, income in enumerate(incomes):
+                         income_label = Label(
+                         self.summary_block,
+                         text=f"Income {i+1}: £{transaction['amount']}({transaction['category']})",
+                         bg="#0F102B",
+                         fg="white",
+                )
+            income_label.place(x=20, y=20, anchor="center")
+             
+                    
+            
+         
+        
+     
+        
+        
+        
+    
+    def view_expenses(self):
+        pass
 
 
 

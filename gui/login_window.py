@@ -1,10 +1,9 @@
 import tkinter as tk
 from tkinter import PhotoImage, Label, Entry, Button
-import os
 
 class LoginWindow(tk.Tk):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent):
+        super().__init__(parent)
 
         # set window properties
         self.title("Login - PyFinance (Personal Finance Tracker)")
@@ -17,7 +16,7 @@ class LoginWindow(tk.Tk):
 
 
         # logo
-        self.logo = PhotoImage(file="src/assets/logo.png")
+        self.logo = PhotoImage(file="assets/logo.png")
         logo_label = Label(self.box, image=self.logo, bg="#333333") 
         logo_label.pack(pady=20, padx=30, anchor="center")
 
