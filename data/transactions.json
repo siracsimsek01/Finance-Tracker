@@ -1,13 +1,5 @@
 [
     {
-        "id": 1551,
-        "type": "Income",
-        "category": "Salary",
-        "amount": 500.0,
-        "date": "2022-10-02",
-        "payee_source": "company"
-    },
-    {
         "id": 8525,
         "type": "Income",
         "category": "Pension",
@@ -46,5 +38,13 @@
         "amount": 30.0,
         "date": "2023-10-05",
         "payee_source": "McDonalds"
+    },
+    {
+        "id": 9460,
+        "type": "Income",
+        "category": "Salary",
+        "amount": 300.0,
+        "date": "2024-10-25",
+        "payee_source": "company"
     }
 ]

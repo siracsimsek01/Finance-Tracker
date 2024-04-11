@@ -51,6 +51,8 @@ class AddTransactionWindow(Toplevel):
         else:
             self.category['values'] = ["Food", "Rent", "Clothing", "Car", "Health", "Others"]
         self.category.set('')  
+        
+    
 
     def save_transaction(self):
         transaction_type = self.transaction_type.get()
