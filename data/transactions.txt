@@ -1,0 +1,10 @@
+2024-02-10 - 1000.0 - Salary - Company - Income
+2024-01-10 - 500.0 - Pension - Retirement Fund - Income
+2024-01-15 - 200.0 - Interest - Bank - Income
+2024-04-03 - 1500.0 - Others - Side Business - Income
+2024-02-12 - 300.0 - Food - Grocery Store - Expense
+2024-03-01 - 1200.0 - Rent - Landlord - Expense
+2024-02-20 - 250.0 - Clothing - Mall - Expense
+2024-01-25 - 800.0 - Car - Car Service - Expense
+2024-04-10 - 600.0 - Health - Clinic - Expense
+2024-03-15 - 450.0 - Others - Miscellaneous - Expense

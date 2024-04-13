@@ -1,7 +1,8 @@
 from tkinter import Tk, Frame
+from gui.main_window import MainWindow
 
 class LoginWindow(Frame):
-    def __init__(self, parent=None):
+    def __init__(self, parent=MainWindow):
         super().__init__(parent)
         self.pack()
 

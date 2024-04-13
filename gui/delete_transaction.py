@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox, Label, Entry, Button
 import json
 
+
 class DeleteTransaction(tk.Toplevel):
     def __init__(self, parent):
         super().__init__(parent)

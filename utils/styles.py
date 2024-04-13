@@ -59,7 +59,7 @@ def secondary_label(master, **kwargs):
     default.update(kwargs)
     return Label(master, **default)
 
-def header_label(master, **kwargs):
+def balance_label(master, **kwargs):
     default = {
         "bg": COLOR_BG,
         "fg": COLOR_WHITE,
@@ -68,7 +68,7 @@ def header_label(master, **kwargs):
     default.update(kwargs)
     return Label(master, **default)
     
-def balance_label(master, **kwargs):
+def header_label(master, **kwargs):
     default = {
         "bg": COLOR_FRAME,
         "fg": COLOR_WHITE,
