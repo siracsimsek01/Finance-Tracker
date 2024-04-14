@@ -14,7 +14,7 @@ Finance Tracker is a Python application that allows users to track their financi
 
 1. Clone the repository:
     ```
-    git clone https://github.com/yourusername/Finance-Tracker.git
+    git clone https://github.com/siracsimsek01/Finance-Tracker.git
     ```
 2. Navigate to the project directory:
     ```
