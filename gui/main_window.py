@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import Label, Frame, PhotoImage, Canvas, Scrollbar, Frame, PhotoImage
+from tkinter import Label, Frame, PhotoImage, Canvas, Scrollbar, Frame, PhotoImage, Button
 from .add_transaction_window import AddTransactionWindow
 from .dashboard_window import Dashboard
 from utils.styles import *
@@ -35,27 +35,27 @@ class MainWindow(tk.Tk):
         )
         self.label.place(x=135, y=150, anchor="center")
 
-        self.add_transaction_button = tk.Button(
+        self.add_transaction_button = Button(
             self.left_frame,
             text="Add Transaction",
             font=TEXT_LABEL,
             command=self.add_transaction,
         )
-        self.add_transaction_button.place(x=140, y=240, anchor="center")
+        self.add_transaction_button.place(x=140, y=300, anchor="center")
 
-        self.dashboard_button = tk.Button(
+        self.dashboard_button = Button(
             self.left_frame, text="Dashboard", font=TEXT_LABEL, command=self.dashboard
         )
-        self.dashboard_button.place(x=140, y=270, anchor="center")
+        self.dashboard_button.place(x=140, y=330, anchor="center")
 
-        self.logout_button = tk.Button(
+        self.logout_button = Button(
             self.left_frame,
             text="Logout",
             relief="solid",
             font=TEXT_LABEL,
             command=self.logout,
         )
-        self.logout_button.place(x=140, y=400, anchor="center")
+        self.logout_button.place(x=140, y=500, anchor="center")
         
         self.logo = PhotoImage(file="assets/logo.png", width=200, height=200)
         self.logo_label = Label(self.left_frame, image=self.logo, bg=COLOR_BG)
@@ -195,9 +195,6 @@ class MainWindow(tk.Tk):
         )
         Dashboard.view_transactions(self)
         
-    # def start_main_window(user_name):
-    #     mw = MainWindow(user_name)
-    #     mw.mainloop()
     
       
 
@@ -220,5 +217,5 @@ class MainWindow(tk.Tk):
 
 
 # if __name__ == "__main__":
-#      main_window = MainWindow(user_name)
+#     main_window = MainWindow(user_name)
 #     main_window.mainloop()
