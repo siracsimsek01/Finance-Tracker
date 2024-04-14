@@ -1,14 +1,6 @@
-# PyFinance - Personal Finance Tracker
+# Finance Tracker
 
-Finance Tracker is a Python application that allows users to track their financial transactions.
-
-## Features
-
-- User login system
-- View all transactions
-- Track incomes and spending
-- Visualize transactions 
-- Filter transactions by time, type, category, and source
+Finance Tracker is a Python application for tracking financial transactions.
 
 ## Installation
 
@@ -20,7 +12,15 @@ Finance Tracker is a Python application that allows users to track their financi
     ```
     cd Finance-Tracker
     ```
-3. Install the required dependencies:
+3. Create a virtual environment:
+    ```
+    python3 -m venv env
+    ```
+4. Activate the virtual environment:
+    ```
+    source env/bin/activate
+    ```
+5. Install the required packages:
     ```
     pip install -r requirements.txt
     ```
@@ -29,11 +29,11 @@ Finance Tracker is a Python application that allows users to track their financi
 
 1. Run the `main.py` script to start the application:
     ```
-    python3 -m main.py
+    python3 main.py
     ```
 2. Log in with your username.
 3. You will be greeted with a dashboard where you can view and filter your transactions.
-4. You can access all transactions from the data folder
+4. You can access all transactions from the data folder.
 
 ## Contributing
 
