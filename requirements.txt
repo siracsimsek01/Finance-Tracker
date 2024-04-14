@@ -1,0 +1,7 @@
+tkinter==8.6
+json==2.0.9
+datetime==4.3
+random==1.0.1
+os==0.1.4
+matplotlib==3.4.2
+numpy==1.21.0

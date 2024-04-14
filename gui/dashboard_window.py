@@ -68,6 +68,9 @@ class Dashboard(Toplevel):
         self.pieChart_btn = Button(self.main_frame, text="Statistics in Pie Chart", width=30, height=3, background=COLOR_BG, fg=COLOR_BLACK, command=self.display_piechart)
         self.pieChart_btn.place(x=525, y=230)
         
+        self.refresh_button = Button(self.main_frame, text="Refresh", command=self.refresh_transactions)
+        self.refresh_button.place(x=635, y=470)
+        
         
         
     def display_barchart(self):
@@ -174,7 +177,7 @@ class Dashboard(Toplevel):
                 amount = transaction["amount"]
                 category = transaction["category"]
                 source = transaction["payee_source"]
-                transaction_type = transaction["type"]
+                type = transaction["type"]
 
                 transaction_label = primary_label(self.transactions_frame,text=f"{category} from {source} ---  {type} \n {date}                                                                  £{amount}", font=TEXT_LABEL)
                 transaction_label.pack(side="top", fill="x", padx=10, pady=10)
@@ -208,6 +211,9 @@ class Dashboard(Toplevel):
             messagebox.showinfo("Success", "Transactions printed to data/transactions.txt")
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred: {e}")
+            
+    def refresh_transactions(self):
+        self.view_transactions()
             
 
        

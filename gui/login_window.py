@@ -1,24 +1,28 @@
 import tkinter as tk
-from tkinter import PhotoImage, Label, Entry, Button
+from tkinter import PhotoImage, Label, Entry, Button, messagebox, Frame
+from .main_window import MainWindow
+
 
 class LoginWindow(tk.Tk):
-    def __init__(self, parent):
-        super().__init__(parent)
-
+    def __init__(self, user_name):
+        super().__init__()
+     
         # set window properties
         self.title("Login - PyFinance (Personal Finance Tracker)")
         self.geometry("800x600")
         self.configure(bg="#0F102B")  # set the background color
 
         # Container frame for the login form
-        self.box = tk.Frame(self, width=405, height=240, bg="#333333")
+        self.box = Frame(self, width=405, height=400, bg="#333333")
         self.box.place(relx=0.5, rely=0.5, anchor="center")
-
+        self.user_name = user_name
+        
 
         # logo
         self.logo = PhotoImage(file="assets/logo.png")
         logo_label = Label(self.box, image=self.logo, bg="#333333") 
-        logo_label.pack(pady=20, padx=30, anchor="center")
+        logo_label.pack(padx=20, pady=20, anchor="center", side="top", fill="x")
+        
 
         # Welcome text
         welcome_text = Label(
@@ -42,7 +46,7 @@ class LoginWindow(tk.Tk):
 
         # Input field
         self.name_input = Entry(self.box, font=("Helvetica", 16), width=30)
-        self.name_input.pack(pady=10)
+        self.name_input.pack(pady=5)
 
         # button
         login_button = Button(
@@ -55,13 +59,21 @@ class LoginWindow(tk.Tk):
         
         )
         login_button.pack(pady=10)
+        
+
+
 
     def login(self):
         self.user_name = self.name_input.get()
-        # print("User name entered:", user_name)
-        self.destroy()
+        if self.user_name:
+            self.destroy()
+            mw = MainWindow(user_name=self.user_name)
+            mw.mainloop()
+        else:
+            messagebox.showerror("Error", "Please enter your name to continue.")
+    
 
-# # Run the window
-# if __name__ == "__main__":
-#     login_window = LoginWindow()
-#     login_window.mainloop()
+# Run the window
+if __name__ == "__main__":
+    lw = LoginWindow()
+    lw.mainloop()

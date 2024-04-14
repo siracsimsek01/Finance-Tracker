@@ -1,15 +1,9 @@
-from tkinter import Tk, Frame
-from gui.main_window import MainWindow
+import tkinter as tk
+from gui.login_window import LoginWindow
 
-class LoginWindow(Frame):
-    def __init__(self, parent=MainWindow):
-        super().__init__(parent)
-        self.pack()
 
-def main():
-    root = Tk()
-    login_app = LoginWindow(root)
-    root.mainloop()
 
 if __name__ == "__main__":
-    main()
+    lw = LoginWindow(user_name=None)
+    lw.mainloop()
+    

@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import Toplevel, Label, Entry, Button, messagebox
 from tkinter.ttk import Combobox
-# from main_window import MainWindow
 import json
 from datetime import datetime
 import random
@@ -108,11 +107,11 @@ class AddTransactionWindow(Toplevel):
         with open('data/balance.json', 'w') as file:
             json.dump(self.parent.balance, file)
 
-        # If this window has a reference to a parent window, update balance
+        # If this window has a reference to a parent window update balance
         if hasattr(self, 'parent') and hasattr(self.parent, 'update_balance'):
             self.parent.update_balance()
 
-        self.destroy()  # Close the AddTransactionWindow
+        self.destroy()  
         
         
     # def get_average_income(self):
@@ -139,9 +138,9 @@ class AddTransactionWindow(Toplevel):
 
 
 
-if __name__ == '__main__':
-    # This section is for testing purposes
-    root = tk.Tk()
-    root.withdraw()
-    atw = AddTransactionWindow(root)
-    atw.mainloop()
+# if __name__ == '__main__':
+#     # This section is for testing purposes
+#     root = tk.Tk()
+#     root.withdraw()
+#     atw = AddTransactionWindow(root)
+#     atw.mainloop()

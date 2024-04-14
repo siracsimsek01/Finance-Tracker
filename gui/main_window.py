@@ -1,25 +1,25 @@
 import tkinter as tk
-from tkinter import Label, Frame, PhotoImage, Canvas, Scrollbar, Frame
+from tkinter import Label, Frame, PhotoImage, Canvas, Scrollbar, Frame, PhotoImage
 from .add_transaction_window import AddTransactionWindow
-from .login_window import LoginWindow
 from .dashboard_window import Dashboard
 from utils.styles import *
 import json
 import os
 
-# from .utils import *
+
 from .delete_transaction import DeleteTransaction
 
 
 class MainWindow(tk.Tk):
 
-    def __init__(self, user_name=""):
-        super().__init__()
+    def __init__(self, user_name):
+        tk.Tk.__init__(self)
         self.title("PyFinance - Personal Finance Tracker")
         self.geometry("700x700")
         self.configure(bg="#0F102B")
         self.balance = 0
         self.resizable(False, False)
+        self.user_name = user_name
 
         # Set user name and greeting
 
@@ -31,7 +31,7 @@ class MainWindow(tk.Tk):
         self.user_label.place(x=150, y=100, anchor="center")
 
         self.label = primary_label(
-            self.left_frame, text=f"Hello, {user_name}!", font=TEXT_TEXT
+            self.left_frame, text=f"Hello, {self.user_name}!", font=TEXT_TEXT
         )
         self.label.place(x=135, y=150, anchor="center")
 
@@ -55,7 +55,11 @@ class MainWindow(tk.Tk):
             font=TEXT_LABEL,
             command=self.logout,
         )
-        self.logout_button.place(x=140, y=300, anchor="center")
+        self.logout_button.place(x=140, y=400, anchor="center")
+        
+        self.logo = PhotoImage(file="assets/logo.png", width=200, height=200)
+        self.logo_label = Label(self.left_frame, image=self.logo, bg=COLOR_BG)
+        self.logo_label.place(x=150, y=650, anchor="center")
 
         self.right_frame = Frame(self, bg=COLOR_PRIMARY, width=200, height=400)
         self.right_frame.pack(side="right", fill="both", expand=True)
@@ -114,7 +118,7 @@ class MainWindow(tk.Tk):
             self.right_frame,
             text="Refresh",
             font=TEXT_LABEL,
-            command=self.update_balance,
+            command=self.update_transactions
         )
         self.refresh_button.pack(side="bottom", fill="x", padx=20, pady=20)
 
@@ -179,6 +183,23 @@ class MainWindow(tk.Tk):
         self.balance = self.calculate_balance(transactions)
         self.balance_label.config(text=f"{self.balance}")
         return self.balance
+    
+    def update_transactions(self):
+        transactions = self.load_transactions()
+        self.transactions_frame.destroy()
+        self.transactions_frame = Frame(
+            self.canvas, bg=COLOR_PRIMARY, width=350, height=250
+        )
+        self.transactions_frame_id = self.canvas.create_window(
+            (0, 0), window=self.transactions_frame, anchor="nw"
+        )
+        Dashboard.view_transactions(self)
+        
+    # def start_main_window(user_name):
+    #     mw = MainWindow(user_name)
+    #     mw.mainloop()
+    
+      
 
     def dashboard(self):
         dashboard = Dashboard(self)
@@ -192,11 +213,12 @@ class MainWindow(tk.Tk):
         Dashboard.view_transactions(self)
 
     def logout(self):
+        from .login_window import LoginWindow
         self.destroy()
-        lw = LoginWindow()
+        lw = LoginWindow(self)
         lw.mainloop()
 
 
-if __name__ == "__main__":
-    mw = MainWindow("Test User")
-    mw.mainloop()
+# if __name__ == "__main__":
+#      main_window = MainWindow(user_name)
+#     main_window.mainloop()

@@ -8,3 +8,8 @@
 2024-01-25 - 800.0 - Car - Car Service - Expense
 2024-04-10 - 600.0 - Health - Clinic - Expense
 2024-03-15 - 450.0 - Others - Miscellaneous - Expense
+2024-01-01 - 5000.0 - Salary - Company - Income
+2024-05-14 - 10.0 - Food - food - Expense
+2024-05-13 - 30.0 - Food - Burger - Expense
+2024-05-04 - 50.0 - Interest - bank - Income
+2024-05-04 - 30.0 - Food - food - Expense
